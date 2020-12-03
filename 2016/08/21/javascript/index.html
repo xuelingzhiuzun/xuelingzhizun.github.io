@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="JavaScript一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言，最早是在HTML（标准通用标记语言下的一个应用）网页上使用，用来给HTML网页增加动态功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript">
+<meta property="og:url" content="http://example.com/2016/08/21/javascript/index.html">
+<meta property="og:site_name" content="XFNOTES">
+<meta property="og:description" content="JavaScript一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言，最早是在HTML（标准通用标记语言下的一个应用）网页上使用，用来给HTML网页增加动态功能。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-08-21T08:36:24.000Z">
+<meta property="article:modified_time" content="2018-01-07T11:40:14.000Z">
+<meta property="article:author" content="xuefeng">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="语言">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2016/08/21/javascript/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>javascript | XFNOTES</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">XFNOTES</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-ategories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>ategories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2016/08/21/javascript/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xuefeng">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XFNOTES">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          javascript
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-08-21 16:36:24" itemprop="dateCreated datePublished" datetime="2016-08-21T16:36:24+08:00">2016-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-01-07 19:40:14" itemprop="dateModified" datetime="2018-01-07T19:40:14+08:00">2018-01-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>JavaScript一种直译式脚本语言，是一种动态类型、弱类型、基于原型的语言，内置支持类型。它的解释器被称为JavaScript引擎，为浏览器的一部分，广泛用于客户端的脚本语言，最早是在HTML（标准通用标记语言下的一个应用）网页上使用，用来给HTML网页增加动态功能。</p>
+<a id="more"></a>
+<h1 id="javascript-对象"><a href="#javascript-对象" class="headerlink" title="javascript 对象"></a>javascript 对象</h1><h2 id="JS-Array"><a href="#JS-Array" class="headerlink" title="JS Array"></a>JS Array</h2><h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach()"></a>forEach()</h3><p><code>Javascript</code>的<code>forEach()</code>标准格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">array1.forEach(callbackfn[, thisArg])</span><br></pre></td></tr></table></figure>
+<hr>
+<p>** 参数 **</p>
+<ul>
+<li><code>arry1</code>       必需      一个数组</li>
+<li><code>callbackfn</code>  必需      一个最多可以接受三个参数的函数，对于数组中的每一个元素，<code>forEach</code>都会调用<code>callbackfn</code>函数一次</li>
+<li><code>thisArg</code>     可选      可在<code>callbackfn</code>函数中为其引用<code>this</code>关键字的对象，如果省略<code>thisArg</code>，则<code>undefined</code>将用做<code>this</code>的值</li>
+</ul>
+<hr>
+<p>** 注意 **</p>
+<ul>
+<li>如果<code>callbackfn</code> 参数不是函数对象，则将引发<code>TypeError</code> 异常。</li>
+<li>对于数组中的每个元素，<code>forEach</code> 方法都会调用<code>callbackfn</code> 函数一次（采用升序索引顺序）。 </li>
+<li>不为数组中缺少的元素调用该回调函数。</li>
+<li>除了数组对象之外，<code>forEach</code> 方法可由具有 <code>length</code> 属性且具有已按数字编制索引的属性名的任何对象使用。</li>
+</ul>
+<p>** callbackfn语法 **</p>
+<p>回调函数<code>callbackfn</code>的标准格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function callbackfn(value, index, array1)</span><br></pre></td></tr></table></figure>
+<p>可使用最多三个参数来声明回调函数。</p>
+<p>回调参数含义：<br>   <code>value</code>            数组元素的值。<br>   <code>index</code>            数组元素的数字索引。<br>   <code>array1</code>           包含该元素的数组对象。</p>
+<p>** 修改数组对象 **<br><code>forEach</code> 方法不直接修改原始数组，但回调函数可能会修改它。 下表描述了在 forEach 方法启动后修改数组对象所获得的结果。</p>
+<p><code>forEach</code> 方法启动后的条件—————–元素是否传递给回调函数？</p>
+<ul>
+<li>在数组的原始长度之外添加元素————-否。</li>
+<li>添加元素以填充数组中缺少的元素———–是，如果该索引尚未传递给回调函数。</li>
+<li>元素已更改——————————-是，如果该元素尚未传递给回调函数。</li>
+<li>从数组中删除元素————————-否，除非该元素已传递给回调函数。</li>
+</ul>
+<p>下面的示例阐释了 <code>forEach</code> 方法的用法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Define the callback function. </span><br><span class="line">function ShowResults(value, index, ar) &#123; </span><br><span class="line">    document.write(&quot;value: &quot; + value); </span><br><span class="line">    document.write(&quot; index: &quot; + index); </span><br><span class="line">    document.write(&quot;&lt;br &#x2F;&gt;&quot;); </span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; Create an array. </span><br><span class="line">var letters &#x3D; [&#39;ab&#39;, &#39;cd&#39;, &#39;ef&#39;]; </span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; Call the ShowResults callback function for each </span><br><span class="line">&#x2F;&#x2F; array element. </span><br><span class="line">letters.forEach(ShowResults); </span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; Output: </span><br><span class="line">&#x2F;&#x2F;  value: ab index: 0  </span><br><span class="line">&#x2F;&#x2F;  value: cd index: 1  </span><br><span class="line">&#x2F;&#x2F;  value: ef index: 2 </span><br></pre></td></tr></table></figure>
+<p>在下面的示例中，<code>callbackfn</code> 参数包含回调函数的代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Create an array. </span><br><span class="line">var numbers &#x3D; [10, 11, 12]; </span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; Call the addNumber callback function for each array element. </span><br><span class="line">var sum &#x3D; 0; </span><br><span class="line">numbers.forEach( </span><br><span class="line">    function addNumber(value) &#123; sum +&#x3D; value; &#125; </span><br><span class="line">); </span><br><span class="line"> </span><br><span class="line">document.write(sum); </span><br><span class="line">&#x2F;&#x2F; Output: 33 </span><br></pre></td></tr></table></figure>
+<p>下面的示例阐释了 <code>thisArg</code> 参数的用法，该参数指定可对其引用 <code>this</code> 关键字的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Define the object that contains the callback function. </span><br><span class="line">var obj &#x3D; &#123; </span><br><span class="line">    showResults: function(value, index) &#123; </span><br><span class="line">        &#x2F;&#x2F; Call calcSquare by using the this value. </span><br><span class="line">        var squared &#x3D; this.calcSquare(value); </span><br><span class="line"> </span><br><span class="line">        document.write(&quot;value: &quot; + value); </span><br><span class="line">        document.write(&quot; index: &quot; + index); </span><br><span class="line">        document.write(&quot; squared: &quot; + squared); </span><br><span class="line">        document.write(&quot;&lt;br &#x2F;&gt;&quot;); </span><br><span class="line">    &#125;, </span><br><span class="line">    calcSquare: function(x) &#123; return x * x &#125; </span><br><span class="line">&#125;; </span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; Define an array. </span><br><span class="line">var numbers &#x3D; [5, 6]; </span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; Call the showResults callback function for each array element. </span><br><span class="line">&#x2F;&#x2F; The obj is the this value within the  </span><br><span class="line">&#x2F;&#x2F; callback function. </span><br><span class="line">numbers.forEach(obj.showResults, obj); </span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; Embed the callback function in the forEach statement. </span><br><span class="line">&#x2F;&#x2F; The obj argument is the this value within the obj object. </span><br><span class="line">&#x2F;&#x2F; The output is the same as for the previous statement. </span><br><span class="line">numbers.forEach(function(value, index) &#123; this.showResults(value, index) &#125;, obj); </span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; Output: </span><br><span class="line">&#x2F;&#x2F;  value: 5 index: 0 squared: 25 </span><br><span class="line">&#x2F;&#x2F;  value: 6 index: 1 squared: 36 </span><br><span class="line">&#x2F;&#x2F;  value: 5 index: 0 squared: 25 </span><br><span class="line">&#x2F;&#x2F;  value: 6 index: 1 squared: 36</span><br></pre></td></tr></table></figure>
+<p>摘自<a target="_blank" rel="noopener" href="https://technet.microsoft.com/zh-cn/ff679980(v=vs.85">微软TechNet</a></p>
+<h2 id="JS-Math"><a href="#JS-Math" class="headerlink" title="JS Math"></a>JS Math</h2><p>Math对象用于执行数学任务</p>
+<p><strong>使用Math的属性和方法的语法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var pi_value &#x3D; Math.PI;</span><br><span class="line">var sqrt_value &#x3D; Math.sqrt(15);</span><br></pre></td></tr></table></figure>
+<p><strong>注释</strong><br>Math 对象并不像 <code>Date</code> 和 <code>String</code> 那样是对象的类，因此没有构造函数 <code>Math()</code>，像 <code>Math.sin()</code> 这样的函数只是函数，不是某个对象的方法。您无需创建它，通过把 Math 作为对象使用就可以调用其所有属性和方法。</p>
+<h3 id="Math-对象属性"><a href="#Math-对象属性" class="headerlink" title="Math 对象属性"></a>Math 对象属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">属性	描述</span><br><span class="line">E	返回算术常量 e，即自然对数的底数（约等于2.718）。</span><br><span class="line">LN2	返回 2 的自然对数（约等于0.693）。</span><br><span class="line">LN10	返回 10 的自然对数（约等于2.302）。</span><br><span class="line">LOG2E	返回以 2 为底的 e 的对数（约等于 1.414）。</span><br><span class="line">LOG10E	返回以 10 为底的 e 的对数（约等于0.434）。</span><br><span class="line">PI	返回圆周率（约等于3.14159）。</span><br><span class="line">SQRT1_2	返回返回 2 的平方根的倒数（约等于 0.707）。</span><br><span class="line">SQRT2	返回 2 的平方根（约等于 1.414）。</span><br></pre></td></tr></table></figure>
+
+<h3 id="Math-对象方法"><a href="#Math-对象方法" class="headerlink" title="Math 对象方法"></a>Math 对象方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">方法          描述</span><br><span class="line">abs(x)	      返回数的绝对值。</span><br><span class="line">acos(x)	      返回数的反余弦值。</span><br><span class="line">asin(x)	      返回数的反正弦值。</span><br><span class="line">atan(x)	      以介于 -PI&#x2F;2 与 PI&#x2F;2 弧度之间的数值来返回 x 的反正切值。</span><br><span class="line">atan2(y,x)    返回从 x 轴到点 (x,y) 的角度（介于 -PI&#x2F;2 与 PI&#x2F;2 弧度之间）。</span><br><span class="line">ceil(x)	      对数进行上舍入。</span><br><span class="line">cos(x)	      返回数的余弦。</span><br><span class="line">exp(x)	      返回 e 的指数。</span><br><span class="line">floor(x)      对数进行下舍入。</span><br><span class="line">log(x)	      返回数的自然对数（底为e）。</span><br><span class="line">max(x,y)      返回 x 和 y 中的最高值。</span><br><span class="line">min(x,y)      返回 x 和 y 中的最低值。</span><br><span class="line">pow(x,y)      返回 x 的 y 次幂。</span><br><span class="line">random()      返回 0 ~ 1 之间的随机数。</span><br><span class="line">round(x)      把数四舍五入为最接近的整数。</span><br><span class="line">sin(x)	      返回数的正弦。</span><br><span class="line">sqrt(x)	      返回数的平方根。</span><br><span class="line">tan(x)	      返回角的正切。</span><br><span class="line">toSource()    返回该对象的源代码。</span><br><span class="line">valueOf()     返回 Math 对象的原始值。</span><br></pre></td></tr></table></figure>
+
+<h2 id="JS-Number"><a href="#JS-Number" class="headerlink" title="JS Number"></a>JS Number</h2><p><em>Number() 函数把对象的值转化为数字</em></p>
+<h2 id="JS-Date"><a href="#JS-Date" class="headerlink" title="JS Date"></a>JS Date</h2><h3 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout()"></a>setTimeout()</h3><p>js的setTimeout方法用处比较多，通常用在页面刷新了、延迟执行了等等</p>
+<p><strong>意义</strong>：<code>setTimeout()</code>方法用于在指定的毫秒数后调用函数或计算表达式<br><strong>语法</strong>：<code>setTimeout(code,millisec)</code><br><strong>参数</strong>：<br><code>code</code> —— 延时后需执行的代码<br><code>millisec</code> —— 延时时间<br><strong>提示</strong>：<code>setTimeout()</code> 只执行<code>code</code> 一次。如果要多次调用，请使用 <code>setInterval()</code> 或者让 <code>code</code> 自身再次调用 <code>setTimeout()</code>。<br><strong>示例</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;Content-Type&quot; content&#x3D;&quot;text&#x2F;html; charset&#x3D;UTF-8&quot;&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt; &lt;font color&#x3D;blue&gt; haorooms博客示范网页 &lt;&#x2F;font&gt; &lt;&#x2F;h1&gt;</span><br><span class="line">&lt;p&gt; 请等三秒!&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">setTimeout(&quot;alert(&#39;对不起, haorooms博客要你等候多时&#39;)&quot;, 3000 )</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;body&gt; </span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="setInterval"><a href="#setInterval" class="headerlink" title="setInterval()"></a>setInterval()</h3><p><strong>意义</strong>：<code>setInterval()</code> 方法可按照指定的周期（以毫秒计）来调用函数或计算表达式。<code>setInterval()</code> 方法会不停地调用函数，直到 <code>clearInterval()</code> 被调用或窗口被关闭。由 <code>setInterval()</code> 返回的 <code>ID</code> 值可用作 <code>clearInterval()</code> 方法的参数。<br><strong>语法</strong>：<code>setInterval(code,millisec[,&#39;lang&#39;])</code><br><strong>参数</strong>：<br><code>code</code> —— 要调用的代码<br><code>millisec</code> —— 周期性执行或调用<code>code</code>之间的时间间隔，单位毫秒</p>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p><code>setTimeout</code>只运行一次，也就是说设定的时间到后就触发运行指定代码，运行完后即结束。如果运行的代码中再次运行同样的<code>setTimeout</code>命令，则可循环运行。（即 要循环运行，需函数自身再次调用 <code>setTimeout()</code>）</p>
+<p>而 <code>setinterval</code>是循环运行的，即每到设定时间间隔就触发指定代码。这是真正的定时器。</p>
+<p><code>setinterval</code>使用简单，而<code>setTimeout</code>则比较灵活，可以随时退出循环，而且可以设置为按不固定的时间间隔来运行，比如第一次1秒，第二次2秒，第三次3秒。</p>
+<h3 id="clearTimeout"><a href="#clearTimeout" class="headerlink" title="clearTimeout()"></a>clearTimeout()</h3><p><strong>语法</strong>：<code>clearTimeout(timeoutID)</code><br><strong>说明</strong>：要使用 clearTimeout( ), 我们设定 setTimeout( ) 时 , 要给予这 setTimout( ) 一个名称 , 这名称就是 timeoutID , 我们叫停时 , 就是用这 timeoutID 来叫停 , 这是一个自定义名称 , 但很多人就以 timeoutID 为名<br><strong>示例</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;Content-Type&quot; content&#x3D;&quot;text&#x2F;html; charset&#x3D;UTF-8&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">x &#x3D; 0</span><br><span class="line">y &#x3D; 0</span><br><span class="line">function count1()</span><br><span class="line">&#123;　x &#x3D; x + 1</span><br><span class="line">　 document.display1.box1.value &#x3D; x</span><br><span class="line">　 meter1&#x3D;setTimeout(&quot;count1()&quot;, 1000)</span><br><span class="line">&#125;</span><br><span class="line">function count2()</span><br><span class="line">&#123;　y &#x3D; y + 1</span><br><span class="line">　 document.display2.box2.value &#x3D; y</span><br><span class="line">　 meter2&#x3D;setTimeout(&quot;count2()&quot;, 1000)</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt; &lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt; </span><br><span class="line">&lt;p&gt; &lt;&#x2F;br&gt;</span><br><span class="line">&lt;form name&#x3D;&quot;display1&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;box1&quot; value&#x3D;&quot;0&quot; size&#x3D;4 &gt;</span><br><span class="line">    &lt;input type&#x3D;button value&#x3D;&quot;停止计时&quot; onClick&#x3D;&quot;clearTimeout(meter1) &quot; &gt;</span><br><span class="line">    &lt;input type&#x3D;button value&#x3D;&quot;继续计时&quot; onClick&#x3D;&quot;count1() &quot; &gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;form name&#x3D;&quot;display2&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;box2&quot; value&#x3D;&quot;0&quot; size&#x3D;4 &gt;</span><br><span class="line">    &lt;input type&#x3D;button value&#x3D;&quot;停止计时&quot; onClick&#x3D;&quot;clearTimeout(meter2) &quot; &gt;</span><br><span class="line">    &lt;input type&#x3D;button value&#x3D;&quot;继续计时&quot; onClick&#x3D;&quot;count2() &quot; &gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    count1()</span><br><span class="line">    count2()</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="JS-Functions"><a href="#JS-Functions" class="headerlink" title="JS Functions"></a>JS Functions</h2><h3 id="parseInt"><a href="#parseInt" class="headerlink" title="parseInt()"></a>parseInt()</h3><p><strong>含义</strong>：<br><code>parseInt()</code> 函数可解析一个字符串，并返回一个整数。<br><strong>语法</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parseInt(string, radix)</span><br></pre></td></tr></table></figure>
+<p>参数       描述<br><code>string</code>   必需。要被解析的字符串。<br><code>radix</code>       可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。</p>
+<ul>
+<li>如果省略<code>radix</code>参数或其值为<code> 0</code>，则数字将以 <code>10</code> 为基础来解析。如果它以 <code>“0x”</code> 或 <code>“0X” </code>开头，将以 <code>16</code> 为基数。</li>
+<li>如果<code>radix</code>参数小于 <code>2 或者大于 </code>36<code>，则 </code>parseInt()<code>将返回</code>NaN`。</li>
+</ul>
+<p><strong>返回值</strong>：<br>返回解析后的数字。</p>
+<p><strong>说明</strong>：<br>当参数 <code>radix</code> 的值为 <code>0</code>，或没有设置该参数时，<code>parseInt()</code> 会根据 <code>string</code> 来判断数字的基数。</p>
+<p>举例，如果 <code>string</code> 以 <code>&quot;0x&quot;</code> 开头，<code>parseInt()</code> 会把 <code>string</code> 的其余部分解析为十六进制的整数。如果 <code>string</code> 以 <code>0</code> 开头，那么 <code>ECMAScript v3</code> 允许<code> parseInt()</code> 的一个实现把其后的字符解析为八进制或十六进制的数字。如果 <code>string</code> 以 <code>1 ~ 9</code> 的数字开头，<code>parseInt()</code> 将把它解析为十进制的整数。</p>
+<p><strong>提示</strong></p>
+<ul>
+<li>只有字符串中的第一个数字会被返回。</li>
+<li>开头和结尾的空格是允许的。</li>
+<li>如果字符串的第一个字符不能被转换为数字，那么 parseFloat() 会返回 NaN。</li>
+<li>*示例**<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">parseInt(&quot;10&quot;);			&#x2F;&#x2F;返回 10</span><br><span class="line">parseInt(&quot;19&quot;,10);		&#x2F;&#x2F;返回 19 (10+9)</span><br><span class="line">parseInt(&quot;11&quot;,2);		&#x2F;&#x2F;返回 3 (2+1)</span><br><span class="line">parseInt(&quot;17&quot;,8);		&#x2F;&#x2F;返回 15 (8+7)</span><br><span class="line">parseInt(&quot;1f&quot;,16);		&#x2F;&#x2F;返回 31 (16+15)</span><br><span class="line">parseInt(&quot;010&quot;);		&#x2F;&#x2F;未定：返回 10 或 8</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="number"><a href="#number" class="headerlink" title="number()"></a>number()</h3><p><code>Number()</code><em>函数把对象的值转化为数字</em><br><strong>语法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Number(object)</span><br></pre></td></tr></table></figure>
+<p><strong>参数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">参数          描述</span><br><span class="line">object        必需，Javascript对象</span><br></pre></td></tr></table></figure>
+<p><strong>返回值</strong></p>
+<ul>
+<li>如果参数是Date对象，Number()返回的是从1970 年 1 月 1 日至今的毫秒数</li>
+<li>如果对象的值无法转换为数字，那么 Number() 函数返回 NaN</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;</span><br><span class="line"></span><br><span class="line">var test1&#x3D; new Boolean(true);</span><br><span class="line">var test2&#x3D; new Boolean(false);</span><br><span class="line">var test3&#x3D; new Date();</span><br><span class="line">var test4&#x3D; new String(&quot;999&quot;);</span><br><span class="line">var test5&#x3D; new String(&quot;999 888&quot;);</span><br><span class="line"></span><br><span class="line">document.write(Number(test1)+ &quot;&lt;br &#x2F;&gt;&quot;);</span><br><span class="line">document.write(Number(test2)+ &quot;&lt;br &#x2F;&gt;&quot;);</span><br><span class="line">document.write(Number(test3)+ &quot;&lt;br &#x2F;&gt;&quot;);</span><br><span class="line">document.write(Number(test4)+ &quot;&lt;br &#x2F;&gt;&quot;);</span><br><span class="line">document.write(Number(test5)+ &quot;&lt;br &#x2F;&gt;&quot;);</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 输出</span><br><span class="line">1</span><br><span class="line">0</span><br><span class="line">1256657776588</span><br><span class="line">999</span><br><span class="line">NaN</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/javascript/" rel="tag"># javascript</a>
+              <a href="/tags/%E8%AF%AD%E8%A8%80/" rel="tag"># 语言</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/08/20/cheerio/" rel="prev" title="cheerio">
+      <i class="fa fa-chevron-left"></i> cheerio
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/08/23/npm/" rel="next" title="npm">
+      npm <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#javascript-%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">javascript 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-Array"><span class="nav-number">1.1.</span> <span class="nav-text">JS Array</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#forEach"><span class="nav-number">1.1.1.</span> <span class="nav-text">forEach()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-Math"><span class="nav-number">1.2.</span> <span class="nav-text">JS Math</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Math-%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7"><span class="nav-number">1.2.1.</span> <span class="nav-text">Math 对象属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math-%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.2.</span> <span class="nav-text">Math 对象方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-Number"><span class="nav-number">1.3.</span> <span class="nav-text">JS Number</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-Date"><span class="nav-number">1.4.</span> <span class="nav-text">JS Date</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setTimeout"><span class="nav-number">1.4.1.</span> <span class="nav-text">setTimeout()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setInterval"><span class="nav-number">1.4.2.</span> <span class="nav-text">setInterval()</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%BA%E5%88%AB"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clearTimeout"><span class="nav-number">1.4.3.</span> <span class="nav-text">clearTimeout()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-Functions"><span class="nav-number">1.5.</span> <span class="nav-text">JS Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#parseInt"><span class="nav-number">1.5.1.</span> <span class="nav-text">parseInt()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#number"><span class="nav-number">1.5.2.</span> <span class="nav-text">number()</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xuefeng</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xuefeng</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
